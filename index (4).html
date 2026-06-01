@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Tiwari | Mechanical Design Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0D0F14;
+  --bg2:#111419;
+  --bg3:#161B22;
+  --steel:#1E2430;
+  --off:#E8EBF0;
+  --dim:#7A8494;
+  --blue:#2D7DD2;
+  --cyan:#00C8FF;
+  --orange:#FF6B35;
+  --border:rgba(45,125,210,0.2);
+  --border2:rgba(232,235,240,0.07);
+  --grid:rgba(45,125,210,0.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--off);overflow-x:hidden;line-height:1.55}
+
+/* BLUEPRINT GRID BACKGROUND */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:40px 40px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(13,15,20,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--off);text-decoration:none}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-badge{font-family:'DM Mono',monospace;font-size:0.65rem;padding:0.3rem 0.9rem;border:1px solid var(--cyan);color:var(--bg);background:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.nav-badge:hover{background:var(--blue);border-color:var(--blue)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;z-index:1}
+.hero-left{padding:8rem 4rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border2);position:relative;overflow:hidden}
+.hero-left::before{content:'';position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,255,0.06) 0%,transparent 65%);pointer-events:none}
+.hero-tag{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem}
+.hero-tag::before{content:'//';opacity:0.5}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,7vw,7rem);line-height:0.95;color:var(--off);margin-bottom:0.5rem;letter-spacing:0.03em}
+.hero-name .accent{color:var(--cyan);display:block}
+.hero-role{font-size:0.9rem;color:var(--dim);margin-bottom:2.5rem;max-width:420px;line-height:1.8}
+.hero-role strong{color:var(--off)}
+.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap}
+.btn-primary{background:var(--cyan);color:var(--bg);padding:0.75rem 2rem;font-family:'DM Mono',monospace;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}
+.btn-primary:hover{background:var(--blue)}
+.btn-outline{border:1px solid var(--border);color:var(--off);padding:0.75rem 2rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;display:inline-block}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.hero-right{background:var(--bg2);padding:8rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;gap:2.5rem;position:relative}
+.hero-stat{position:relative;padding-left:1.5rem;border-left:2px solid var(--cyan)}
+.hero-stat::after{content:'';position:absolute;left:-3px;top:0;width:4px;height:4px;background:var(--cyan)}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--off);line-height:1;letter-spacing:0.02em}
+.hero-stat-num span{color:var(--cyan)}
+.hero-stat-label{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-top:0.3rem}
+.identity-badges{display:flex;flex-direction:column;gap:0.75rem;margin-top:1.5rem;padding-top:2rem;border-top:1px solid var(--border2)}
+.identity-badge{display:flex;align-items:center;gap:0.75rem;font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.08em;color:var(--off)}
+.identity-badge::before{content:'';width:6px;height:6px;background:var(--cyan);flex-shrink:0}
+.identity-badge span{color:var(--dim);font-size:0.68rem}
+
+/* TICKER */
+.ticker{background:var(--blue);overflow:hidden;padding:0.55rem 0;position:relative;z-index:1}
+.ticker-inner{display:inline-flex;animation:tick 35s linear infinite}
+.ticker-item{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.85);padding:0 2rem}
+.ticker-sep{color:rgba(255,255,255,0.3)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION WRAPPER */
+.section{position:relative;z-index:1;border-bottom:1px solid var(--border2)}
+.section-header{padding:4rem 5rem 3rem;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--border2)}
+.sec-eyebrow{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:0.04em;color:var(--off)}
+.sec-count{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:rgba(45,125,210,0.12);line-height:1}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:0}
+.about-left{background:var(--bg2);padding:4rem 3.5rem;border-right:1px solid var(--border2)}
+.about-right{padding:4rem}
+.about-body{font-size:0.95rem;color:rgba(232,235,240,0.65);line-height:1.9;margin-bottom:2.5rem}
+.about-body strong{color:var(--off)}
+.specs-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border2);margin-top:2rem}
+.spec-item{background:var(--bg);padding:1.25rem 1.5rem}
+.spec-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem}
+.spec-val{font-size:0.85rem;color:var(--off);font-weight:500}
+
+/* EXPERIENCE TIMELINE */
+.exp-section{padding:0}
+.exp-item{display:grid;grid-template-columns:280px 1fr;border-bottom:1px solid var(--border2);transition:background 0.2s}
+.exp-item:hover{background:var(--bg2)}
+.exp-item:last-child{border-bottom:none}
+.exp-left{padding:3rem 3.5rem;border-right:1px solid var(--border2);background:var(--bg2)}
+.exp-company{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;color:var(--cyan);line-height:1;margin-bottom:0.5rem}
+.exp-period{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);margin-bottom:0.75rem}
+.exp-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.65rem;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.3);color:var(--cyan)}
+.exp-right{padding:3rem 4rem}
+.exp-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.04em;color:var(--off);margin-bottom:1rem}
+.exp-desc{font-size:0.85rem;color:rgba(232,235,240,0.6);line-height:1.85;margin-bottom:1.5rem}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.exp-bullets li{font-size:0.82rem;color:rgba(232,235,240,0.65);padding-left:1.5rem;position:relative;line-height:1.7}
+.exp-bullets li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:0.75rem}
+
+/* PROJECTS GRID */
+.proj-section{padding:0}
+.proj-filter{padding:1.5rem 5rem;display:flex;gap:0.75rem;border-bottom:1px solid var(--border2);background:var(--bg2)}
+.filter-btn{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 1rem;background:transparent;border:1px solid var(--border2);color:var(--dim);cursor:pointer;transition:all 0.2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,200,255,0.05)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.proj-card{padding:2.5rem;border-right:1px solid var(--border2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden;transition:background 0.25s;cursor:default}
+.proj-card:hover{background:var(--bg2)}
+.proj-card:nth-child(3n){border-right:none}
+.proj-card::before{content:attr(data-num);position:absolute;top:1rem;right:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(45,125,210,0.08);line-height:1;pointer-events:none}
+.proj-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.ptag{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem}
+.ptag-blue{background:rgba(45,125,210,0.15);color:var(--blue);border:1px solid rgba(45,125,210,0.3)}
+.ptag-cyan{background:rgba(0,200,255,0.1);color:var(--cyan);border:1px solid rgba(0,200,255,0.25)}
+.ptag-orange{background:rgba(255,107,53,0.12);color:var(--orange);border:1px solid rgba(255,107,53,0.3)}
+.ptag-green{background:rgba(50,180,120,0.12);color:#50B478;border:1px solid rgba(50,180,120,0.3)}
+.proj-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.04em;color:var(--off);margin-bottom:0.6rem;line-height:1.1}
+.proj-desc{font-size:0.78rem;color:rgba(232,235,240,0.55);line-height:1.75}
+.proj-link{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan);text-decoration:none;padding:0.3rem 0.7rem;border:1px solid rgba(0,200,255,0.25);background:rgba(0,200,255,0.05);transition:all 0.2s}
+.proj-link:hover{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+.proj-link-orange{color:var(--orange);border-color:rgba(255,107,53,0.25);background:rgba(255,107,53,0.05)}
+.proj-link-orange:hover{background:var(--orange);color:var(--bg);border-color:var(--orange)}
+.proj-link-green{color:#50B478;border-color:rgba(50,180,120,0.25);background:rgba(50,180,120,0.05)}
+.proj-link-green:hover{background:#50B478;color:var(--bg);border-color:#50B478}
+.proj-links{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem}
+.proj-card.hidden{display:none}
+
+/* SKILLS SECTION */
+.skills-section{padding:4rem 5rem}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border2);margin-top:3rem}
+.skill-group{background:var(--bg);padding:2rem 2rem 2rem;transition:background 0.2s}
+.skill-group:hover{background:var(--bg2)}
+.skill-group-title{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}
+.skill-bars{display:flex;flex-direction:column;gap:0.85rem}
+.skill-bar-item{display:flex;flex-direction:column;gap:0.35rem}
+.skill-bar-label{display:flex;justify-content:space-between;align-items:center}
+.skill-bar-name{font-size:0.8rem;color:var(--off)}
+.skill-bar-pct{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--dim)}
+.skill-bar-track{height:2px;background:var(--border2);position:relative;overflow:hidden}
+.skill-bar-fill{height:100%;background:var(--cyan);position:relative;transform-origin:left;animation:fillBar 1.2s ease-out forwards;transform:scaleX(0)}
+@keyframes fillBar{to{transform:scaleX(1)}}
+
+/* EDUCATION */
+.edu-section{padding:4rem 5rem;border-top:1px solid var(--border2)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border2);margin-top:3rem}
+.edu-card{background:var(--bg);padding:2.5rem;transition:background 0.2s}
+.edu-card:hover{background:var(--bg2)}
+.edu-school{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.04em;color:var(--cyan);margin-bottom:0.4rem}
+.edu-degree{font-size:0.9rem;color:var(--off);font-weight:500;margin-bottom:0.3rem}
+.edu-period{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim)}
+.edu-detail{font-size:0.8rem;color:rgba(232,235,240,0.55);margin-top:0.75rem;line-height:1.75}
+
+/* CONTACT */
+.contact-section{display:grid;grid-template-columns:1fr 1fr;min-height:400px}
+.contact-left{background:var(--cyan);padding:5rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.contact-left::before{content:'CONTACT';position:absolute;bottom:-2rem;right:-1rem;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(13,15,20,0.12);pointer-events:none;letter-spacing:0.05em}
+.contact-big{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--bg);line-height:1;letter-spacing:0.04em}
+.contact-sub{font-size:0.9rem;color:rgba(13,15,20,0.6);margin-top:1rem;max-width:280px;line-height:1.7}
+.contact-right{background:var(--bg2);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;gap:1.5rem}
+.contact-entry{display:grid;grid-template-columns:50px 1fr;gap:1.25rem;align-items:start;text-decoration:none;padding:1.25rem;transition:background 0.2s;border:1px solid transparent}
+.contact-entry:hover{background:var(--steel);border-color:var(--border)}
+.contact-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cyan)}
+.contact-text strong{display:block;font-size:0.85rem;color:var(--off);margin-bottom:0.2rem}
+.contact-text span{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--dim)}
+
+/* FOOTER */
+footer{background:var(--bg);padding:2rem 5rem;border-top:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.06em;color:var(--dim)}
+.footer-logo span{color:var(--cyan)}
+.footer-info{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--dim);letter-spacing:0.1em}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* RESPONSIVE BASICS */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:7rem 2rem 4rem}
+  nav{padding:0 1.5rem}
+  .section-header,.about-right,.edu-section,.skills-section{padding-left:2rem;padding-right:2rem}
+  .about-grid,.edu-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card:nth-child(3n){border-right:1px solid var(--border2)}
+  .skills-grid{grid-template-columns:1fr}
+  .contact-section{grid-template-columns:1fr}
+  .contact-left{padding:3rem 2rem}
+  .contact-right{padding:3rem 2rem}
+  .exp-item{grid-template-columns:1fr}
+  .exp-left{border-right:none;border-bottom:1px solid var(--border2)}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem}
+  .proj-filter{padding:1rem 2rem;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Aditya</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-badge" href="#contact">GET IN TOUCH</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Mechanical Design Engineer</div>
+    <h1 class="hero-name">
+      ADITYA<br>
+      <span class="accent">TIWARI</span>
+    </h1>
+    <p class="hero-role">
+      <strong>Product Development · Manufacturing · Cost Optimization</strong><br>
+      Designed &amp; shipped 5+ production-ready mechanical systems with up to 40% cost reduction. Proficient in SolidWorks, Ansys, FEA, DFM, and end-to-end product development.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="Aditya_Tiwari_Resume.pdf" download="Aditya_Tiwari_Resume.pdf">Download Resume ↓</a>
+      <a class="btn-outline" href="#contact">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat reveal">
+      <div class="hero-stat-num">4<span>+</span></div>
+      <div class="hero-stat-label">Years Professional Exp.</div>
+    </div>
+    <div class="hero-stat reveal reveal-delay-1">
+      <div class="hero-stat-num">5<span>+</span></div>
+      <div class="hero-stat-label">Production Systems Shipped</div>
+    </div>
+    <div class="hero-stat reveal reveal-delay-2">
+      <div class="hero-stat-num">40<span>%</span></div>
+      <div class="hero-stat-label">Cost Reduction Achieved</div>
+    </div>
+    <div class="identity-badges reveal reveal-delay-3">
+      <div class="identity-badge">Stealth Startup <span>· Lead Mechanical Design Engineer</span></div>
+      <div class="identity-badge">Columbia Engineering <span>· M.S. Mechanical Engineering</span></div>
+      <div class="identity-badge">Ex-Worley <span>· Stress &amp; Materials Engineer</span></div>
+      <div class="identity-badge">FSAE <span>· Chassis Technical Lead | Technical Inspector | Quiz Lead</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">SolidWorks </span>
+    <span class="ticker-item">FEA Analysis </span>
+    <span class="ticker-item">DFM </span>
+    <span class="ticker-item">DFMEA </span>
+    <span class="ticker-item">Ansys APDL </span>
+    <span class="ticker-item">Topology Optimization </span>
+    <span class="ticker-item">Injection Molding </span>
+    <span class="ticker-item">CNC Machining </span>
+    <span class="ticker-item">CAESAR-II </span>
+    <span class="ticker-item">Lean Manufacturing </span>
+    <span class="ticker-item">Tolerance Stack-Ups </span>
+    <span class="ticker-item">Supplier Collaboration </span>
+    <span class="ticker-item">Columbia Engineering </span>
+    <span class="ticker-item">Robotics &amp; Mechatronics </span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">SolidWorks </span>
+    <span class="ticker-item">FEA Analysis </span>
+    <span class="ticker-item">DFM </span>
+    <span class="ticker-item">DFMEA </span>
+    <span class="ticker-item">Ansys APDL </span>
+    <span class="ticker-item">Topology Optimization </span>
+    <span class="ticker-item">Injection Molding </span>
+    <span class="ticker-item">CNC Machining </span>
+    <span class="ticker-item">CAESAR-II </span>
+    <span class="ticker-item">Lean Manufacturing </span>
+    <span class="ticker-item">Tolerance Stack-Ups </span>
+    <span class="ticker-item">Supplier Collaboration </span>
+    <span class="ticker-item">Columbia Engineering </span>
+    <span class="ticker-item">Robotics &amp; Mechatronics </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="sec-eyebrow">// 01 — About</div>
+      <div class="sec-title">WHO I AM</div>
+    </div>
+    <div class="sec-count">01</div>
+  </div>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <p class="about-body">
+        I am a <strong>Mechanical Design Engineer</strong> with 3.5+ years of experience spanning product design, manufacturing, and the EPC industry across the US. I'm passionate about all aspects of mechanical design — from <strong>3D modeling and FEA analysis</strong> to hands-on manufacturing and supplier collaboration.
+      </p>
+      <p class="about-body">
+        Proficient in <strong>SolidWorks and Ansys</strong>, I specialize in stress analysis, design optimization, DFM, and tolerance stack-ups. I've delivered cost reduction, reliability improvement, and production scaling across multiple industries — and I hold a degree from <strong>Columbia Engineering</strong>.
+      </p>
+      <p class="about-body">
+        My background also includes robotics, mechatronics, and cutting-edge digital manufacturing techniques, giving me a uniquely broad engineering perspective.
+      </p>
+    </div>
+    <div class="about-right">
+      <div class="specs-list reveal">
+        <div class="spec-item">
+          <div class="spec-label">Location</div>
+          <div class="spec-val">New York City, NY</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Experience</div>
+          <div class="spec-val">4+ Years</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Education</div>
+          <div class="spec-val">Columbia Engineering</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Specialization</div>
+          <div class="spec-val">Product Design &amp; Mfg.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Key Tools</div>
+          <div class="spec-val">SolidWorks · Ansys · CAESAR-II</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Industries</div>
+          <div class="spec-val">Consumer Products · EPC · Robotics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="sec-eyebrow">// 02 — Experience</div>
+      <div class="sec-title">WORK HISTORY</div>
+    </div>
+    <div class="sec-count">02</div>
+  </div>
+  <div class="exp-section">
+
+    <!-- Duralux -->
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">DURALUX</div>
+        <div class="exp-period">Lead Role · US</div>
+        <div class="exp-badge">Lead Design Engineer</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Lead Mechanical Design Engineer — Duralux Shades Inc.</div>
+        <p class="exp-desc">Led product design and manufacturing innovation for a window shade company, overseeing material strategy, failure analysis, and proprietary product development under active NDA.</p>
+        <ul class="exp-bullets">
+          <li>Applied expertise in metalworking, injection molding, and CNC tools to implement lean manufacturing principles, significantly streamlining production and reducing waste.</li>
+          <li>Utilized DFMEA to identify and mitigate potential design and manufacturing failures, enhancing product reliability.</li>
+          <li>Redesigned window shaders in SolidWorks, improving product durability and assembly efficiency.</li>
+          <li>Led a strategic material shift — substituting metals with high-performance plastics — to cut costs without sacrificing quality.</li>
+          <li>Innovative replacement of pre-tensioned springs with helical worm gears, reducing maintenance and improving performance.</li>
+          <li>Led end-to-end R&D of a new outdoor Sukkah/Zip shade system including motors, gear mechanisms, environmental sensors, and control logic.</li>
+          <li>Set up in-house production capabilities: commissioned new machines, ran test runs, and trained shop personnel.</li>
+          <li>Managed vendor relationships overseas — pricing, samples, quality issues, lead times, and MOQs.</li>
+          <li>Supported ERP system implementation to improve part tracking, production planning, and order flow.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Worley -->
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">WORLEY</div>
+        <div class="exp-period">~1.5 Years · EPC Industry</div>
+        <div class="exp-badge">Stress &amp; Materials Engineer</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Stress and Materials Engineer — Worley (Energy · Chemicals · Resources)</div>
+        <p class="exp-desc">Performed stress analysis and managed piping materials for large-scale EPC projects, collaborating with civil, design, and procurement teams across critical industrial systems.</p>
+        <ul class="exp-bullets">
+          <li>Assessed system criticality levels based on client requirements and modeled Stress Critical Line List systems.</li>
+          <li>Introduced improved node stamp and isometric markup formats, streamlining communication with the design team.</li>
+          <li>Performed stress analyses on diverse equipment — pressure vessels, relief valves, and piping systems — using CAESAR-II.</li>
+          <li>Managed piping material line classes for pipeline transportation and process services; reviewed material selection diagrams and line designation tables.</li>
+          <li>Prepared and issued Material Requisitions, Specialty Items Lists, and Piping Engineering Data Sheets.</li>
+          <li>Evaluated vendor submissions for project specification compliance; adhered to ASME codes for pipe specifications.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DJSRacing -->
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">DJSRACING</div>
+        <div class="exp-period">3+ Years · FSAE Team</div>
+        <div class="exp-badge">Chassis Technical Lead</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Chassis Technical Lead — DJSRacing FSAE Team</div>
+        <p class="exp-desc">Led chassis design and manufacturing for a Formula SAE race car across multiple international competitions — FB-2019, FSG-2019, FB-2020 — with roles spanning Chassis Lead, Quiz Lead, and Technical Inspection Lead.</p>
+        <ul class="exp-bullets">
+          <li>Developed a custom ergonomics rig for driver comfort and optimal frame setup, tested across all drivers.</li>
+          <li>Designed a specialized torsional stiffness measurement rig; corroborated empirical results with Ansys APDL simulations.</li>
+          <li>Engineered a lightweight carbon fiber (CF) impact attenuator that absorbs energy rather than transmitting it — validated by physical crash tests.</li>
+          <li>Introduced jigs and fixtures for manufacturing precision during chassis welding; planned future CMM integration.</li>
+          <li>Led full-car assembly oversight; produced a comprehensive assembly video documenting the entire build process.</li>
+          <li>Contributed to Statics team events: Design, Cost, and Business Plan documentation.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="sec-eyebrow">// 03 — Projects</div>
+      <div class="sec-title">FEATURED WORK</div>
+    </div>
+    <div class="sec-count">03</div>
+  </div>
+
+  <div class="proj-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="robotics">Robotics</button>
+    <button class="filter-btn" data-filter="manufacturing">Manufacturing</button>
+    <button class="filter-btn" data-filter="fea">FEA / CFD</button>
+    <button class="filter-btn" data-filter="software">Software</button>
+    <button class="filter-btn" data-filter="sustainability">Sustainability</button>
+  </div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card reveal" data-num="01" data-category="robotics">
+      <div class="proj-tags"><span class="ptag ptag-cyan">Robotics</span><span class="ptag ptag-blue">Fusion 360</span><span class="ptag ptag-blue">3D Printing</span></div>
+      <div class="proj-name">QUADRUPED ROBOT — REGIS</div>
+      <p class="proj-desc">Designed and fabricated a 4-legged walking robot with Fusion360, FDM and SLS 3D printing. Used Altair Inspire for topological optimization (12% weight savings). Conducted URDF and GAIT analysis for 15% energy efficiency gain. Applied ANSYS thermal analysis for heat performance.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/1DD5EqCnzOoBl23oMrnWSzKyV2Z3RM7uR/edit?slide=id.p1#slide=id.p1" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-orange" href="https://drive.google.com/file/d/1NkMwa1JGGwcmZOw03SHykzzCGene2wN7/view" target="_blank">▶ Video</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-1" data-num="02" data-category="sustainability">
+      <div class="proj-tags"><span class="ptag ptag-green">Sustainability</span><span class="ptag ptag-blue">AI/CAD</span><span class="ptag ptag-cyan">Desalination</span></div>
+      <div class="proj-name">SUSTAIN-AI &amp; SALTBUSTER</div>
+      <p class="proj-desc">Two Tough Tech projects. SustainAI integrates AI with CAD to cut design iterations and material rework by 40% — enabling data-driven eco material substitutions. SaltBuster uses Temperature Swing Solvent Extraction (TSSE) for efficient desalination of hypersaline brines with a pilot plant concept for Dubai.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/sustainai-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-orange" href="https://www.youtube.com/watch?v=sustainai-video" target="_blank">▶ Video</a>
+        <a class="proj-link" href="https://docs.google.com/presentation/d/saltbuster-presentation" target="_blank">▶ SaltBuster Deck</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-2" data-num="03" data-category="manufacturing">
+      <div class="proj-tags"><span class="ptag ptag-blue">Generative Design</span><span class="ptag ptag-cyan">OpenSCAD</span><span class="ptag ptag-blue">3D Printing</span></div>
+      <div class="proj-name">GENERATIVE 3D LATTICES</div>
+      <p class="proj-desc">Created a lattice lampshade through 3D printing for an LED tea-light. Used OpenSCAD for procedural geometry generation with comprehensive algorithm documentation. Sanded the print to a polished finish — mastery of 3D printing, programming, and craftsmanship.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/lattice-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-green" href="https://github.com/lattice-code" target="_blank">▶ Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" data-num="04" data-category="software manufacturing">
+      <div class="proj-tags"><span class="ptag ptag-orange">Python</span><span class="ptag ptag-blue">Digital Mfg.</span><span class="ptag ptag-blue">Laser Cutting</span></div>
+      <div class="proj-name">DIGITAL MANUFACTURING — LASERCUT BOX</div>
+      <p class="proj-desc">Designed a dynamic desk organizer using a custom Python program. Managed dimensions, material thickness, user text, and four fractal patterns with robust error-checking. Showcases software development, user-centric design, and manufacturing versatility.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/lasercut-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-green" href="https://github.com/lasercut-code" target="_blank">▶ Code</a>
+        <a class="proj-link proj-link-orange" href="https://www.youtube.com/watch?v=lasercut-video" target="_blank">▶ Video</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-1" data-num="05" data-category="fea">
+      <div class="proj-tags"><span class="ptag ptag-cyan">Altair Inspire</span><span class="ptag ptag-blue">Topology Opt.</span><span class="ptag ptag-blue">FEA</span></div>
+      <div class="proj-name">TOPOLOGY OPTIMIZATION — DESK &amp; CHAIR</div>
+      <p class="proj-desc">Applied advanced topology optimization in Altair Inspire to design an optimal desk and chair meeting precise constraints. Leveraged lattice structures to reduce weight while preserving structural integrity. Produced scaled 3D-printed prototypes as proof of feasibility.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/topology-presentation" target="_blank">▶ Presentation</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-2" data-num="06" data-category="robotics">
+      <div class="proj-tags"><span class="ptag ptag-green">Human-Centered</span><span class="ptag ptag-cyan">AI</span><span class="ptag ptag-blue">CAD</span></div>
+      <div class="proj-name">BIKEVIBE — CYCLING SAFETY SYSTEM</div>
+      <p class="proj-desc">Spearheaded "BikeVibe," a pioneering cycling safety solution for NYC's urban landscape. Comprehensive user research with cyclists and pedestrians; iterative prototyping with stakeholder feedback. Integrated AI and deep tech for advanced safety features on city streets.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/bikevibe-link1" target="_blank">▶ Presentation 1</a>
+        <a class="proj-link" href="https://docs.google.com/presentation/d/bikevibe-link2" target="_blank">▶ Presentation 2</a>
+        <a class="proj-link proj-link-orange" href="https://www.youtube.com/watch?v=bikevibe-video" target="_blank">▶ Video</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" data-num="07" data-category="fea">
+      <div class="proj-tags"><span class="ptag ptag-blue">ANSYS Fluent</span><span class="ptag ptag-cyan">CFD</span><span class="ptag ptag-orange">FEA</span></div>
+      <div class="proj-name">FEA &amp; CFD PROJECTS</div>
+      <p class="proj-desc">Three studies: Aerofoil fluid mechanics (ANSYS Fluent, lift/drag), Thermal analysis of a brake rotor (SolidWorks + ANSYS transient thermal FEA), and FSAE suspension upright design with CNC code generation in Fusion 360 — condensed to two machining setups.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/fea-cfd-presentation" target="_blank">▶ Presentation</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-1" data-num="08" data-category="robotics">
+      <div class="proj-tags"><span class="ptag ptag-cyan">Robotics</span><span class="ptag ptag-green">UAV</span><span class="ptag ptag-blue">Automation</span></div>
+      <div class="proj-name">BOTANY BOT &amp; DRAGONFLY UAV</div>
+      <p class="proj-desc">Two robotics projects. BotanyBot: a greenhouse watering robot to improve plant life and minimize water wastage. Dragonfly UAV: research into rapidly deployed micro-profiler arrays for underwater thermocline observation based on published journal research.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/botanybot-presentation" target="_blank">▶ BotanyBot Deck</a>
+        <a class="proj-link" href="https://docs.google.com/presentation/d/dragonfly-presentation" target="_blank">▶ Dragonfly Deck</a>
+        <a class="proj-link proj-link-orange" href="https://www.youtube.com/watch?v=botanybot-video" target="_blank">▶ Video</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-2" data-num="09" data-category="software fea">
+      <div class="proj-tags"><span class="ptag ptag-orange">CNN / ML</span><span class="ptag ptag-blue">Python</span><span class="ptag ptag-cyan">Computer Vision</span></div>
+      <div class="proj-name">SHOPFLOOR AUTOMATION USING CNN</div>
+      <p class="proj-desc">Built an image recognition tool using convolutional neural networks to identify diverse workshop instruments, combating safety incidents from improper tool usage. Well-structured database categorizes tools for easy updates — addressing training gaps and upholding safety standards at scale.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/cnn-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-green" href="https://github.com/cnn-report" target="_blank">▶ Report</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" data-num="10" data-category="manufacturing">
+      <div class="proj-tags"><span class="ptag ptag-blue">SolidWorks</span><span class="ptag ptag-cyan">MATLAB</span><span class="ptag ptag-blue">Sensor Design</span></div>
+      <div class="proj-name">SHOCKPOT MOUNTS — ROAD QUALITY ANALYSIS</div>
+      <p class="proj-desc">Road quality analysis system integrating a linear potentiometer to gauge wheel displacement with a data logger and Butterworth filter for signal smoothing. Visualized data on displacement vs. distance graphs with color-coded conditions. Designed in SolidWorks; processed in MATLAB.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/shockpot-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-green" href="https://github.com/shockpot-paper" target="_blank">▶ Paper</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-1" data-num="11" data-category="software">
+      <div class="proj-tags"><span class="ptag ptag-orange">Python</span><span class="ptag ptag-blue">Digital Mfg.</span><span class="ptag ptag-green">Embroidery</span></div>
+      <div class="proj-name">DIGITAL MULTI-THREAD EMBROIDERY</div>
+      <p class="proj-desc">Custom software generating high-quality embroidery files in JEF format. User-friendly interface with multiple parameters for personalized designs; optimized stitch parameters and thread colors. Successfully embroidered patterns on real garments, validating the system end-to-end.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/embroidery-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-green" href="https://github.com/embroidery-code" target="_blank">▶ Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-delay-2" data-num="12" data-category="manufacturing">
+      <div class="proj-tags"><span class="ptag ptag-cyan">3D Printing</span><span class="ptag ptag-blue">Food Printing</span><span class="ptag ptag-blue">Rheology</span></div>
+      <div class="proj-name">DIGITAL FOOD PRINTING</div>
+      <p class="proj-desc">Explored food printing with meticulous calibration tests for extrusion and feed rates across diverse food materials. Achieved exceptional complexity in Spirograph-inspired 3D food patterns and demonstrated multi-material structures — showcasing adaptability in digital food manufacturing.</p>
+      <div class="proj-links">
+        <a class="proj-link" href="https://docs.google.com/presentation/d/foodprint-presentation" target="_blank">▶ Presentation</a>
+        <a class="proj-link proj-link-orange" href="https://www.youtube.com/watch?v=foodprint-video" target="_blank">▶ Video</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="sec-eyebrow">// 04 — Skills</div>
+      <div class="sec-title">TECHNICAL STACK</div>
+    </div>
+    <div class="sec-count">04</div>
+  </div>
+  <div class="skills-section">
+    <div class="skills-grid">
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">CAD &amp; Simulation</div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">SolidWorks</span><span class="skill-bar-pct">95%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Ansys Workbench / APDL</span><span class="skill-bar-pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Altair Inspire</span><span class="skill-bar-pct">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Fusion 360</span><span class="skill-bar-pct">78%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">CAESAR-II</span><span class="skill-bar-pct">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Manufacturing &amp; Processes</div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">DFM / DFMEA</span><span class="skill-bar-pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">CNC Machining</span><span class="skill-bar-pct">82%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Injection Molding</span><span class="skill-bar-pct">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">FDM / SLS 3D Printing</span><span class="skill-bar-pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Lean Manufacturing</span><span class="skill-bar-pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="skill-group-title">Engineering &amp; Programming</div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">FEA / Stress Analysis</span><span class="skill-bar-pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Tolerance Stack-Ups / GD&amp;T</span><span class="skill-bar-pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Python</span><span class="skill-bar-pct">75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">MATLAB</span><span class="skill-bar-pct">72%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span class="skill-bar-name">Robotics / URDF / GAIT</span><span class="skill-bar-pct">70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="sec-eyebrow">// 05 — Education</div>
+      <div class="sec-title">ACADEMIC BACKGROUND</div>
+    </div>
+    <div class="sec-count">05</div>
+  </div>
+  <div class="edu-section">
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-school">Columbia University</div>
+        <div class="edu-degree">M.S. / Graduate Studies — Mechanical Engineering</div>
+        <div class="edu-period">Columbia Engineering · New York, NY</div>
+        <div class="edu-detail">Projects: Quadruped Robot (REGIS), Topology Optimization, Digital Manufacturing (Lasercut Box, Embroidery, Food Printing), Human-Centered Design (BikeVibe), Robotics (BotanyBot, Dragonfly UAV), Shop-Floor Automation using CNN, Sustain-AI &amp; SaltBuster.</div>
+      </div>
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-school">DJSCE Mumbai</div>
+        <div class="edu-degree">B.E. — Mechanical Engineering</div>
+        <div class="edu-period">Dwarkadas J. Sanghvi College of Engineering · Mumbai, India</div>
+        <div class="edu-detail">Chassis Technical Lead for DJSRacing FSAE Team. Projects: FEA &amp; CFD studies (aerofoil, brake rotor, FSAE upright), ShockPot mounts for road quality analysis, and competition participation in FB-2019, FSG-2019, FB-2020.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-left">
+    <div>
+      <div class="contact-big">LET'S BUILD<br>SOMETHING.</div>
+      <p class="contact-sub">Open to mechanical design, product development, and manufacturing roles. Let's connect and explore what we can engineer together.</p>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(13,15,20,0.45)">Columbia Engineering · New York City, NY</div>
+  </div>
+  <div class="contact-right">
+    <a class="contact-entry" href="https://www.linkedin.com/in/aditya-tiwari-at29/" target="_blank">
+      <div class="contact-icon">in</div>
+      <div class="contact-text"><strong>LinkedIn</strong><span>aditya-tiwari-at29 — Connect professionally</span></div>
+    </a>
+    <a class="contact-entry" href="mailto:aat2199@columbia.edu">
+      <div class="contact-icon">@</div>
+      <div class="contact-text"><strong>Email</strong><span>aat2199@columbia.edu</span></div>
+    </a>
+    <a class="contact-entry" href="tel:6462495496">
+      <div class="contact-icon">☎</div>
+      <div class="contact-text"><strong>Phone</strong><span>+1 646-249-5496</span></div>
+    </a>
+    <a class="contact-entry" href="Aditya_Tiwari_Resume.pdf" download="Aditya_Tiwari_Resume.pdf">
+      <div class="contact-icon">↓</div>
+      <div class="contact-text"><strong>Resume</strong><span>Download PDF — Aditya Tiwari</span></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Aditya</div>
+  <div class="footer-info">Aditya Tiwari · Mechanical Design Engineer · New York City</div>
+</footer>
+
+<script>
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, {threshold: 0.12});
+revealEls.forEach(el => observer.observe(el));
+
+// Skill bar animation
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.skill-bar-fill').forEach((bar,i) => {
+        bar.style.animationDelay = (i * 0.12) + 's';
+        bar.style.animationPlayState = 'running';
+      });
+      barObserver.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.2});
+document.querySelectorAll('.skill-group').forEach(g => {
+  g.querySelectorAll('.skill-bar-fill').forEach(b => b.style.animationPlayState = 'paused');
+  barObserver.observe(g);
+});
+
+// Project filter
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projCards = document.querySelectorAll('.proj-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    projCards.forEach(card => {
+      const cats = card.dataset.category || '';
+      if(filter === 'all' || cats.includes(filter)){
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
